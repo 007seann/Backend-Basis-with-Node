@@ -20,8 +20,8 @@ router.put('/:id', (req, res) => {
 
 // Delete Tweet
 router.delete('/:id', (req, res) => {
-    
-    res.status(204).send('Sucessfully deleted')
+
+    res.status(204).send('Successfully deleted')
 });
 
 
