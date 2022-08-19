@@ -1,14 +1,22 @@
-import MongoDb from 'mongodb';
 import { config } from '../config.js';
+import Mongoose from 'mongoose';
 
-let db;
 export async function connectDB() {
-  return MongoDb.MongoClient.connect(config.db.host) //
-    .then((client) => {
-      db = client.db();
-    });
+  return Mongoose.connect(config.db.host); //
 }
 
+export function useVirtualId(schema) {
+  // -id => -id
+  schema.virtual('id').get(function () {
+    return this._id.toString();
+  });
+  schema.set('toJSON', { virtuals: true });
+  schema.set('toObject', { virtual: true });
+}
+
+// TODO(Sean): Delete below
+
+let db;
 export function getUsers() {
   return db.collection('users');
 }
